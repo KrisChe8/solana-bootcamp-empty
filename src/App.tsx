@@ -1,4 +1,5 @@
 import React from "react";
+import { MyTokensPage } from "@/pages/my-tokens";
 
 import { useEffect, useState } from "react";
 
@@ -51,8 +52,14 @@ const App: React.FC = () => {
     accountOffers: 1,
   });
 
-  const { connect, connected, publicKey, disconnect, select, wallets } =
-    useWallet();
+  const {
+    connect,
+    connected,
+    publicKey,
+    disconnect,
+    select,
+    wallets,
+  } = useWallet();
 
   const ITEMS_PER_PAGE = 5;
 
@@ -136,10 +143,11 @@ const App: React.FC = () => {
           Password: {createPass(walletAddress)}
         </h2>
         <Tabs defaultValue="orders" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="orders">All Offers</TabsTrigger>
             <TabsTrigger value="openOffers">Open Offers</TabsTrigger>
             <TabsTrigger value="accountOffers">Account Offers</TabsTrigger>
+            <TabsTrigger value="myTokens">My Tokens</TabsTrigger>
           </TabsList>
 
           <TabsContent value="orders">
@@ -170,7 +178,9 @@ const App: React.FC = () => {
               loading={loading}
             />
           </TabsContent>
-
+          <TabsContent value="myTokens">
+            <MyTokensPage />
+          </TabsContent>
           <TakeOfferDialog
             selectedOffer={selectedOffer}
             setSelectedOffer={setSelectedOffer}
